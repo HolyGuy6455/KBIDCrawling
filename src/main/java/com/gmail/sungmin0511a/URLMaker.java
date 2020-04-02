@@ -5,7 +5,6 @@ package com.gmail.sungmin0511a;
  */
 public class URLMaker {
     
-    private static URLMaker INSTANCE = new URLMaker();
     private int lstFindList = 1;
     private String Desc = "DESC";
     private String GetUp = null;
@@ -23,14 +22,6 @@ public class URLMaker {
     private String txtEDate = "2020-04-02";
     private int rdoFindWord = 1;
     private String txtFindWord = null;
-
-    private URLMaker(){
-        // *^^*
-    }
-
-    public static URLMaker getInstance() {
-        return INSTANCE;
-    }
 
     public void setStartDate(int year, int month, int date) {
         txtSDate = String.format("%d-%d-%d", year,month, date);
