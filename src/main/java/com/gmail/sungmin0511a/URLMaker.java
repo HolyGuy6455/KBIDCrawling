@@ -5,6 +5,7 @@ package com.gmail.sungmin0511a;
  */
 public class URLMaker {
     
+    private int CurSelPage = 1;
     private int lstFindList = 1;
     private String Desc = "DESC";
     private String GetUp = null;
@@ -22,19 +23,24 @@ public class URLMaker {
     private String txtEDate = "2020-04-02";
     private int rdoFindWord = 1;
     private String txtFindWord = null;
+    private int lstViewList = 100;
+
+    public void setCurSelPage(int curSelPage) {
+        this.CurSelPage = curSelPage;
+    }
 
     public void setStartDate(int year, int month, int date) {
-        txtSDate = String.format("%d-%d-%d", year,month, date);
+        this.txtSDate = String.format("%d-%d-%d", year,month, date);
     }
 
     public void setEndDate(int year, int month, int date) {
-        txtEDate = String.format("%d-%d-%d", year,month, date);
+        this.txtEDate = String.format("%d-%d-%d", year,month, date);
     }
 
     public void setLstWork(String str) {
         switch (str) {
             case "전문소방시설공사":
-                lstSArea = 199122;
+                this.lstSArea = 199122;
                 break;
         
             default:
@@ -49,7 +55,7 @@ public class URLMaker {
     public void setLstArea(String str) {
         switch (str) {
             case "경기":
-                lstSArea = 220000;
+                this.lstSArea = 220000;
                 break;
         
             default:
@@ -60,9 +66,13 @@ public class URLMaker {
     public void setLstSArea(String str) {
         switch (str) {
             case "관내":
-                lstSArea = 229999;
+                this.lstSArea = 229999;
                 break;
-        
+
+            case "부천시":
+                this.lstSArea = 221200;
+                break;
+                
             default:
                 break;
         }
@@ -75,6 +85,8 @@ public class URLMaker {
         result.append("/main_search_result.htm?");
         result.append("lstFindList=");
         if(lstFindList != -1) result.append(lstFindList);
+        result.append("&CurSelPage=");
+        if(CurSelPage != -1) result.append(CurSelPage);
         result.append("&Desc=");
         if(Desc != null) result.append(Desc);
         result.append("&GetUp=");
@@ -107,6 +119,8 @@ public class URLMaker {
         if(rdoFindWord != -1) result.append(rdoFindWord);
         result.append("&txtFindWord=");
         if(txtFindWord != null) result.append(txtFindWord);
+        result.append("&lstViewList=");
+        if(lstViewList != -1) result.append(lstViewList);
         return result.toString();
     }
 }
