@@ -14,8 +14,7 @@ public class PostingDocument {
     // String rangeOfFluctuationMax;
     // String rangeOfFluctuationMin;
     String entreaty;
-
-
+    String bidLowerLimit;
 
     Boolean read;
     Boolean proposition;
@@ -68,6 +67,54 @@ public class PostingDocument {
         this.proposition = proposition;
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBaseCost() {
+        return baseCost;
+    }
+
+    public void setBaseCost(String baseCost) {
+        this.baseCost = baseCost;
+    }
+
+    public String getEstimateCost() {
+        return estimateCost;
+    }
+
+    public void setEstimateCost(String estimateCost) {
+        this.estimateCost = estimateCost;
+    }
+
+    public String getRangeOfFluctuation() {
+        return rangeOfFluctuation;
+    }
+
+    public void setRangeOfFluctuation(String rangeOfFluctuation) {
+        this.rangeOfFluctuation = rangeOfFluctuation;
+    }
+
+    public String getEntreaty() {
+        return entreaty;
+    }
+
+    public void setEntreaty(String entreaty) {
+        this.entreaty = entreaty;
+    }
+
+    public String getBidLowerLimit() {
+        return bidLowerLimit;
+    }
+
+    public void setBidLowerLimit(String bidLowerLimit) {
+        this.bidLowerLimit = bidLowerLimit;
+    }
+
+    
     
 }

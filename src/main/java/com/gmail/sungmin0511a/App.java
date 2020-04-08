@@ -78,18 +78,68 @@ public final class App {
 
         PostingDocument firstDocument = postingList.get(0);
         document = connector.connect(firstDocument.getHyperLink());
-        WebElement tbl_bid_view = document.findElement(By.cssSelector(".tbl_bid_view"));
-        List<WebElement> th_bid_view = tbl_bid_view.findElements(By.cssSelector("th"));
-        List<WebElement> td_bid_view = tbl_bid_view.findElements(By.cssSelector("td"));
-        Iterator<WebElement> th_bid_view_iter = th_bid_view.iterator();
-        Iterator<WebElement> td_bid_view_iter = td_bid_view.iterator();
+
+        WebElement tbl_bid_view;
+        List<WebElement> th_bid_view;
+        List<WebElement> td_bid_view;
+        Iterator<WebElement> th_bid_view_iter;
+        Iterator<WebElement> td_bid_view_iter;
+
+        tbl_bid_view = document.findElement(By.cssSelector("table.tbl_bid_view"));
+        th_bid_view = tbl_bid_view.findElements(By.cssSelector("th"));
+        td_bid_view = tbl_bid_view.findElements(By.cssSelector("td"));
+        th_bid_view_iter = th_bid_view.iterator();
+        td_bid_view_iter = td_bid_view.iterator();
+
         while (th_bid_view_iter.hasNext()) {
             WebElement th = th_bid_view_iter.next();
             WebElement td = td_bid_view_iter.next();
             String th_text = th.getText();
             String td_text = td.getText();
+
+            switch (th_text) {
+                case "구분":
+                    firstDocument.setType(td_text);
+                    break;
+            
+                case "기초금액":
+                    firstDocument.setBaseCost(td_text);
+                    break;
+
+                case "추정가격":
+                    firstDocument.setEstimateCost(td_text);
+                    break;
+
+                case "예가변동폭":
+                    firstDocument.setRangeOfFluctuation(td_text);
+                    break;
+
+                case "투찰하한율":
+                firstDocument.setBidLowerLimit(td_text);
+                    break;
+
+                default:
+                    break;
+            }
         }
-        
+
+        tbl_bid_view = document.findElement(By.cssSelector("table.tbl_result_money mb_30"));
+        th_bid_view = tbl_bid_view.findElements(By.cssSelector("th"));
+        td_bid_view = tbl_bid_view.findElements(By.cssSelector("td"));
+        th_bid_view_iter = th_bid_view.iterator();
+        td_bid_view_iter = td_bid_view.iterator();
+
+        while (th_bid_view_iter.hasNext()) {
+            WebElement th = th_bid_view_iter.next();
+            WebElement td = td_bid_view_iter.next();
+            String th_text = th.getText();
+            String td_text = td.getText();
+            if(th_text.compareTo("사정률") == 0){
+                firstDocument.entreaty = td_text;
+                break;
+            }
+        }
+
         Logger.sleep(5000);
 
         connector.close();
