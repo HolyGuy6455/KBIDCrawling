@@ -43,8 +43,10 @@ public final class App {
         urlMaker.setLstArea("경기");
         urlMaker.setLstSArea("관내");
 
+        // 공사입찰 전체 리스트에서 개찰목록 만들기
         for (int i = 1; i < 2; i++) {
             urlMaker.setCurSelPage(i);
+            Logger.log("setCurSelPage " + i);
             document = connector.connect(urlMaker.getUrl());
 
             fomList = document.findElement(By.cssSelector("form[name=\"fomList\"]"));
@@ -64,6 +66,7 @@ public final class App {
                 item.setSubject(hyperLink.getText());
                 item.setCatal(ln_catal.getText());
                 item.setHyperLink(hyperLink.getAttribute("href"));
+                Logger.log("item " + item.subject);
                 for (WebElement webElement : btn_sr) {
                     if (webElement.getText().equals("투찰")) {
                         item.setProposition(true);
@@ -76,6 +79,7 @@ public final class App {
             }
         }
 
+        // 각 개찰결과 하나씩 접근해서 정보 얻기
         PostingDocument firstDocument = postingList.get(0);
         document = connector.connect(firstDocument.getHyperLink());
 
